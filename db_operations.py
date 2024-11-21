@@ -7,13 +7,15 @@ class db_operations():
     def __init__(self, database):
         self.connection = mysql.connector.connect(host="localhost",
             user="root",
-            password="CPSC408!",
-            auth_plugin='mysql_native_password',
-            database=database)
+            password="CPSC408",
+            auth_plugin='mysql_native_password')
         self.cursor = self.connection.cursor()
 
         create_db_query = f"CREATE DATABASE IF NOT EXISTS {database}"
         self.cursor.execute(create_db_query)
+
+        # Select the database
+        self.cursor.execute(f"USE {database}")
 
         print(f"Database '{database}' created successfully.")
         print("connection made..")
@@ -93,14 +95,15 @@ class db_operations():
         CREATE TABLE Flight(
             FlightID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
             DepartureAirport VARCHAR(10) NOT NULL,
-            DestinationAirport VARCHAR(10) NOT NULL.
+            DestinationAirport VARCHAR(10) NOT NULL,
             DepartureTime DATETIME, 
             BoardingTime DATETIME,
+            PlaneID INT NOT NULL,  
             FOREIGN KEY (PlaneID) REFERENCES Plane(PlaneID)
-        );
+         );
         '''
         self.cursor.execute(query)
-        print('Table Created')
+        print('Flight table created successfully')
     
     def create_customer_table(self):
         query = '''
@@ -114,31 +117,36 @@ class db_operations():
         );
         '''
         self.cursor.execute(query)
-        print('Table Created')
+        print('Customer Table Created sucessfully')
 
     def create_plane_table(self):
         query = '''
         CREATE TABLE Plane(
             PlaneID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
             Airline VARCHAR(100),
-            NumberOfSeats INT NOT NULL,
+            NumberOfSeats INT NOT NULL
         );
         '''
         self.cursor.execute(query)
-        print('Table Created')
+        print('Plane table created successfully.')
+
+
     
     def create_ticket_table(self):
         query = '''
         CREATE TABLE Ticket(
             TicketID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
             BoardingGroup INT,
+            FlightID INT NOT NULL,
+            CustomerID INT NOT NULL,
+            SeatID INT NOT NULL,
             FOREIGN KEY (FlightID) REFERENCES Flight(FlightID),
             FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
             FOREIGN KEY (SeatID) REFERENCES Seat(SeatID)
         );
         '''
         self.cursor.execute(query)
-        print('Table Created')
+        print('Ticket table created successfully')
 
     def create_seat_table(self):
         query = '''
@@ -148,25 +156,26 @@ class db_operations():
             SeatType VARCHAR(20),
             Amenities BOOLEAN,
             Baggage BOOLEAN,
+            PlaneID INT NOT NULL,  -- Define PlaneID as a column
             FOREIGN KEY (PlaneID) REFERENCES Plane(PlaneID)
-
         );
         '''
         self.cursor.execute(query)
-        print('Table Created')
+        print('Seat table created successfully')
 
     def create_payment_option_table(self):
         query = '''
         CREATE TABLE PaymentOption(
             PaymentID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
             FlyerPoints INT,
-            CreditCard INT,
+            CreditCard VARCHAR(16),
             Cancellations INT,
+            CustomerID INT NOT NULL,  -- Define CustomerID in PaymentOption
             FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
         );
         '''
         self.cursor.execute(query)
-        print('Table Created')
+        print('PaymentOption table created successfully')
 
 
     # functions that return if a table has records
