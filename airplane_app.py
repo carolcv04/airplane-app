@@ -7,7 +7,7 @@ from datetime import date
 db_ops = db_operations("Airplane")
 
 def startScreen():
-    #ask user if they have an account
+
     db_ops.create_flight_table()
     db_ops.create_customer_table()
     db_ops.create_plane_table()
