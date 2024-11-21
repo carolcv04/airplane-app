@@ -11,6 +11,11 @@ class db_operations():
             auth_plugin='mysql_native_password',
             database=database)
         self.cursor = self.connection.cursor()
+
+        create_db_query = f"CREATE DATABASE IF NOT EXISTS {database}"
+        self.cursor.execute(create_db_query)
+
+        print(f"Database '{database}' created successfully.")
         print("connection made..")
 
     # function to simply execute a DDL or DML query.
