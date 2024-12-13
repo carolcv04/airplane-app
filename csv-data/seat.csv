@@ -1,3 +1,4 @@
+SeatNumber,SeatType,Amenities,Baggage,PlaneID
 1,Window,1,1,1
 2,Aisle,0,1,2
 3,Middle,1,0,3
