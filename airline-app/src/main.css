@@ -316,14 +316,13 @@ nav {
   background-color: rgba(122, 170, 207, 0.903);
 }
 
-/* General styles for the carousel container */
 .carousel-container {
   align-items: center;
   justify-content: center;
 }
 
 .carousel-button {
-  font-size: 30px; /* Adjust the size of the arrows */
+  font-size: 30px; 
   background-color: #3498db;
   color: white;
   border: none;
@@ -350,13 +349,6 @@ nav {
   display: inline-block;
 }
 
-/* Additional header section styling */
-/* .header_container_depart,
-.header_airport {
-  text-align: center;
-  margin-bottom: 20px;
-} */
-
 .depart-container {
   margin-left: 3rem;
   margin-top: 2rem;
@@ -372,7 +364,7 @@ nav {
 }
 
 .change-flight-button {
-  font-size: 18px; /* Adjust the size of the arrows */
+  font-size: 18px; 
   background-color: var(--cute-blue);
   color: white;
   border: none;
@@ -454,7 +446,7 @@ summary {
 }
 
 .flight-select-button {
-  font-size: 1rem; /* Adjust the size of the arrows */
+  font-size: 1rem;
   background-color: var(--cute-blue);
   color: white;
   border: none;
@@ -466,7 +458,7 @@ summary {
 }
 
 .continue-button-flight {
-  font-size: 1.5rem; /* Adjust the size of the arrows */
+  font-size: 1.5rem; 
   font-weight: 1rem;
   background-color: var(--cute-blue);
   color: white;
@@ -486,7 +478,7 @@ summary {
   font-size: 2rem;
   margin-bottom: 5px;
 }
-/* General styles for the return section */
+
 .return-section-container {
   padding: 2rem 1rem;
   max-width: var(--max-width);
@@ -523,12 +515,12 @@ summary {
   justify-content: center;
   gap: 20px;
   padding: 20px;
-  margin-top: 30px; /* Space above */
+  margin-top: 30px; 
   box-shadow: 2rem;
 }
 
 .carousel-button {
-  font-size: 30px; /* Adjust the size of the arrows */
+  font-size: 30px; 
   background-color: var(--cute-blue);
   color: white;
   border: 2rem;
@@ -598,7 +590,7 @@ h3 {
 }
 
 .seat-lists {
-  width: 45%; /* List will take up half of the space */
+  width: 45%; 
   padding-right: 20px;
 }
 
@@ -635,7 +627,7 @@ h3 {
 }
 
 .seat-map {
-  width: 50%; /* Seat map takes up the remaining space */
+  width: 50%; 
   text-align: center;
 }
 
@@ -727,9 +719,8 @@ h3 {
   user-select: none;
 }
 
-/*geeks for geeks */
+/*used geeks for geeks: followed a tutorial */
 
-/* Hide the browser's default checkbox */
 .container input {
   opacity: 0;
   cursor: pointer;
@@ -738,7 +729,6 @@ h3 {
   position: center;
 }
 
-/* Create a custom checkbox */
 .checkmark {
   position: absolute;
   top: 0;
@@ -748,29 +738,24 @@ h3 {
   background-color: #eee;
 }
 
-/* On mouse-over, add a grey background color */
 .container:hover input ~ .checkmark {
   background-color: #ccc;
 }
 
-/* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
   background-color: var(--cute-blue);
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
   content: "";
   position: absolute;
   display: none;
 }
 
-/* Show the checkmark when checked */
 .container input:checked ~ .checkmark:after {
   display: block;
 }
 
-/* Style the checkmark/indicator */
 .container .checkmark:after {
   left: 9px;
   top: 5px;
@@ -783,14 +768,13 @@ h3 {
   transform: rotate(45deg);
 }
 
-/*geeks for geeks */
+/*geeks for geeks until here */
 
 .baggage-control {
   font-size: 1.5rem;
 }
 
-/* chat */
-/* Container styling */
+/* used chatgbt for styling help */
 
 .checked-baggage-section h2 {
   font-size: 1.5rem;
@@ -803,7 +787,6 @@ h3 {
   color: var(--text-dark);
 }
 
-/* Styling for the baggage control section */
 .baggage-control {
   display: flex;
   justify-content: center;
@@ -824,7 +807,7 @@ h3 {
 
 .baggage-control button:hover {
   background-color: #0056b3;
-  transform: scale(1.1); /* Slightly increase size on hover */
+  transform: scale(1.1); 
 }
 
 .baggage-control button:focus {
@@ -836,7 +819,6 @@ h3 {
   color: var(--text-dark);
 }
 
-/* Price styling */
 .checked-baggage-section p {
   font-size: 1.5rem;
   color: #333;
@@ -854,7 +836,6 @@ h3 {
 
 .flight-summary-2 {
   font-size: 1.5rem;
-  /* text-align: center; */
   margin-bottom: 1rem;
 }
 
@@ -885,9 +866,10 @@ h3 {
 
 .confirm-button:hover {
   background-color: rgba(122, 170, 207, 0.903);
-  transform: scale(1.05); /* Slightly increase size on hover */
+  transform: scale(1.05);
   transition: background-color 0.3s;
 }
+/* until here */
 
 .confirmation-message {
   align-items: center;

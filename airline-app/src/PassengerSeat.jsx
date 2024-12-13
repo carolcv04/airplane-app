@@ -4,11 +4,13 @@ import seatingMap from "./assets/seating.png";
 
 const SeatSelectionPage = () => {
   const location = useLocation();
-  const { passengerInfo, totalCost } = location.state || {};
+  const { passengerInfo, totalCost } = location.state || {}; 
 
+  //conditionals & variables
   const [selectedDepartureSeat, setSelectedDepartureSeat] = useState(null);
   const [selectedReturnSeat, setSelectedReturnSeat] = useState(null);
 
+  //hardcoded data 
   const availableSeats = [
     "1A",
     "1B",
@@ -40,12 +42,13 @@ const SeatSelectionPage = () => {
       departureSeat: selectedDepartureSeat,
       returnSeat: selectedReturnSeat,
     };
-
+    /* used chat here */
     navigate("/summary", {
       state: {
         ...location.state, // Carry over all previous state (e.g., passengerInfo, totalCost)
         selectedSeats, // Add the selected seats to the state
       },
+      /* used until here: utilized it to nderstand how to pass in previous information */
     });
   };
 
@@ -63,6 +66,7 @@ const SeatSelectionPage = () => {
                 <span>Select a Seat for Your Departure Flight</span>
               </h2>
               <ul>
+                {/* used chat here */}
                 {availableSeats.map((seat) => (
                   <li
                     key={seat}
@@ -73,6 +77,7 @@ const SeatSelectionPage = () => {
                   >
                     {seat}
                   </li>
+                /* used unil here: utilized it to understand how to handle seat selection */
                 ))}
               </ul>
             </div>
@@ -82,6 +87,7 @@ const SeatSelectionPage = () => {
                 <span>Select a Seat for Your Return Flight</span>
               </h2>
               <ul>
+                {/* used chat here */}
                 {availableSeats.map((seat) => (
                   <li
                     key={seat}
@@ -91,6 +97,7 @@ const SeatSelectionPage = () => {
                     onClick={() => handleSeatSelect(seat, "return")}
                   >
                     {seat}
+                    {/* used unil here: utilized it to understand how to handle seat selection */}
                   </li>
                 ))}
               </ul>

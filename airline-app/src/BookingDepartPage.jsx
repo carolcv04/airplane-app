@@ -10,8 +10,9 @@ const BookingDepartPage = () => {
     departureDate,
     destinationDate,
     travellers,
-  } = location.state || {};
+  } = location.state || {}; //assigns & saves all the flight information
 
+  //hard coded data
   const initialDates = [
     "2024-12-01",
     "2024-12-02",
@@ -79,6 +80,7 @@ const BookingDepartPage = () => {
     },
   ];
 
+  //condtionals & variables to store returning & deparing flight and date, cost and flight selection. 
   const [selectedDepartureDate, setSelectedDepartureDate] = useState(
     departureDate || null
   );
@@ -91,16 +93,18 @@ const BookingDepartPage = () => {
   const [isFlightSelected, setIsFlightSelected] = useState(false);
   const [isReturnFlightSelected, setIsReturnFlightSelected] = useState(false);
 
-  const firstAvailableDate = initialDates.find((date) =>
+  /* used chat here */
+  const firstAvailableDate = initialDates.find((date) => //finds a flight with the assigned date
     availableFlights.some((flight) => flight.availableDates.includes(date))
   );
 
   useEffect(() => {
-    if (!selectedDepartureDate && firstAvailableDate) {
+    if (!selectedDepartureDate && firstAvailableDate) { //sets departure date
       setSelectedDepartureDate(firstAvailableDate);
     }
   }, [selectedDepartureDate, firstAvailableDate]);
 
+  //filters return * departure flights
   const filteredFlights = availableFlights.filter((flight) =>
     flight.availableDates.includes(selectedDepartureDate)
   );
@@ -108,13 +112,16 @@ const BookingDepartPage = () => {
   const filteredReturnFlights = availableReturnFlights.filter((flight) =>
     flight.availableDates.includes(selectedReturnDate)
   );
+  /* until here: utilized it as a refence for the logic of filtering return & departure flights and establishing the starting
+  date based on user input*/
 
-  const handleFlightSelect = (flight) => {
+
+  const handleFlightSelect = (flight) => { //sets the flight information & cost for departure flight
     setSelectedFlight(flight);
-    setTotalCost(flight.price); // Set the total cost to the price of the selected departure flight
+    setTotalCost(flight.price); 
     setIsFlightSelected(true);
 
-    const earliestReturnDate = initialDates.find(
+    const earliestReturnDate = initialDates.find( //finds return date later than sleected date
       (date) => new Date(date) > new Date(selectedDepartureDate)
     );
     if (earliestReturnDate) {
@@ -122,28 +129,32 @@ const BookingDepartPage = () => {
     }
   };
 
-  const handleReturnFlightSelect = (flight) => {
+  const handleReturnFlightSelect = (flight) => {//sets the flight information & cost for departure flight
     setSelectedReturnFlight(flight);
-    setTotalCost(selectedFlight.price + flight.price); // Add return flight price to total cost
+    setTotalCost(selectedFlight.price + flight.price); // add return flight price to total cost
     setIsReturnFlightSelected(true);
   };
 
-  const handleChangeFlight = () => {
+  const handleChangeFlight = () => { //handles if a user decides to change their departure flight
     setIsFlightSelected(false);
     setSelectedFlight(null);
     setSelectedDepartureDate(null);
     setTotalCost(0); // Reset total cost when changing flight
   };
 
-  const handleChangeReturnFlight = () => {
+  const handleChangeReturnFlight = () => { //handles if a user decides to change their return flight
     setIsReturnFlightSelected(false);
     setSelectedReturnFlight(null);
-    setTotalCost(selectedFlight ? selectedFlight.price : 0); // Reset total cost when changing return flight
+    /* used chat here */
+    setTotalCost(selectedFlight ? selectedFlight.price : 0); //resets the cost
+    /* until here: used it to figure out how to reset the cost*/
   };
 
-  const handleReturnDateChange = (direction) => {
+  /* used chat here */
+  const handleReturnDateChange = (direction) => { //handles if a user decides to change their return date
     const currentIndex = initialDates.indexOf(selectedReturnDate);
     let newIndex = currentIndex;
+
 
     if (direction === "prev" && currentIndex > 0) {
       newIndex = currentIndex - 1;
@@ -153,10 +164,11 @@ const BookingDepartPage = () => {
 
     setSelectedReturnDate(initialDates[newIndex]);
   };
+  /*until here: utilized it to figure out how i could navigate through available return dates  */ 
 
   const navigate = useNavigate();
 
-  const handleContinue = () => {
+  const handleContinue = () => { //handles passing the information onto the next page
     if (selectedFlight && selectedReturnFlight) {
       navigate("/passenger-info", {
         state: {
@@ -164,7 +176,7 @@ const BookingDepartPage = () => {
           returnFlight: selectedReturnFlight,
           departureDate: selectedDepartureDate,
           returnDate: selectedReturnDate,
-          totalCost, // Pass the total cost
+          totalCost,
         },
       });
     } else {
@@ -173,6 +185,7 @@ const BookingDepartPage = () => {
   };
 
   return (
+    //main header information
     <div className="login-page">
       <header className="section_container header_container">
         <h1 className="section_header">Airline App</h1>
@@ -186,9 +199,10 @@ const BookingDepartPage = () => {
         <h1 className="flight-header">Departure Flight</h1>
       </header>
 
-      {/* Departure flight selection */}
+      {/* departure flight selection: checks if a flight has not yet been selected */}
       {!isFlightSelected && (
         <div className="carousel-container">
+          {/* used chat here */}
           <button
             onClick={() => {
               const currentIndex = initialDates.indexOf(selectedDepartureDate);
@@ -214,10 +228,12 @@ const BookingDepartPage = () => {
           >
             &#8250;
           </button>
+          {/* used until here: utilized it to figure out how to create a carousel item to iterate through flight dates */}
         </div>
       )}
 
-      {/* Available Flights section */}
+      {/* available flights section: showcases all available departure flights if the user has not yet selected a flight &
+      flights are available */}
       {!isFlightSelected && filteredFlights.length > 0 && (
         <div className="flights-container">
           <div className="flight-list">
@@ -229,7 +245,7 @@ const BookingDepartPage = () => {
               </h2>
             </div>
 
-            {filteredFlights.map((flight) => (
+            {filteredFlights.map((flight) => ( //structure for each individual departure available flight
               <div key={flight.id} className="flight-item">
                 <p className="flight-selection-title">
                   {flight.departure} → {flight.destination}
@@ -250,14 +266,14 @@ const BookingDepartPage = () => {
         </div>
       )}
 
-      {/* If no flights available */}
+      {/* if no flights available */}
       {!isFlightSelected && filteredFlights.length === 0 && (
         <h2>
           <span>No flights available for this date</span>
         </h2>
       )}
 
-      {/* Flight Summary (only when a flight is selected) */}
+      {/* flight Summary (only when a flight is selected) */}
       {isFlightSelected && (
         <div className="flight-summary">
           <p className="departure-summary-title">
@@ -274,14 +290,17 @@ const BookingDepartPage = () => {
         </div>
       )}
 
+
+      {/* header is only showcased when return flight is not selected and departure flight is*/}
       {!isReturnFlightSelected && isFlightSelected && (
         <header className="flight-header-container">
           <h1 className="flight-header">Return Flight</h1>
         </header>
       )}
 
-      {/* Return flight selection */}
+      {/* return flight selection */}
       {!isReturnFlightSelected && isFlightSelected && (
+        /* used chat here */
         <div className="carousel-container">
           <button
             onClick={() => handleReturnDateChange("prev")}
@@ -299,9 +318,12 @@ const BookingDepartPage = () => {
             &#8250;
           </button>
         </div>
+        /* used until here: utilized it to figure out how to create a carousel item to iterate through flight dates */
+
       )}
 
-      {/* Available Return Flights */}
+      {/* available flights section: showcases all available returning flights if the user has not yet selected a flight &
+      flights are available */}
       {isFlightSelected &&
         filteredReturnFlights.length > 0 &&
         !isReturnFlightSelected && (
@@ -315,7 +337,7 @@ const BookingDepartPage = () => {
                 </h2>
               </div>
 
-              {filteredReturnFlights.map((flight) => (
+              {filteredReturnFlights.map((flight) => ( //structure for each individual return available flight
                 <div key={flight.id} className="flight-item">
                   <p className="flight-selection-title">
                     {flight.departure} → {flight.destination}
@@ -336,7 +358,7 @@ const BookingDepartPage = () => {
           </div>
         )}
 
-      {/* If no return flights available */}
+      {/* if no return flights available */}
       {isFlightSelected &&
         filteredReturnFlights.length === 0 &&
         !isReturnFlightSelected && (
@@ -344,14 +366,14 @@ const BookingDepartPage = () => {
             <span>No return flights available for this date</span>
           </h2>
         )}
-
+      {/* header is only showcased when return and departure flight is selected */}
       {isReturnFlightSelected && isFlightSelected && (
         <header className="flight-header-container">
           <h1 className="flight-header">Return Flight</h1>
         </header>
       )}
 
-      {/* Return Flight Summary (only when selected) */}
+      {/* return flight summary (only when selected) */}
       {isReturnFlightSelected && isFlightSelected && (
         <div className="flight-summary">
           <p className="departure-summary-title">
@@ -372,6 +394,7 @@ const BookingDepartPage = () => {
         </div>
       )}
 
+      {/* total cost & continue button only when both flights are selectedb*/}
       {isReturnFlightSelected && isFlightSelected && (
         <div className="total-cost">
           <p>Total Cost: ${totalCost}</p>

@@ -11,8 +11,7 @@ import ViewFlightsPage from "./ViewFlights";
 import ViewPaymentPage from "./ViewPayments";
 import BookingConfirmedPage from "./BookingConfirmation";
 
-// App component with updated routing
-function App() {
+function App() { //establishing all the routes aka the pages
   return (
     <Router>
       <Routes>
@@ -25,7 +24,6 @@ function App() {
           path="/passenger-info"
           element={<PassengerInfoPage initialTotalCost={100} />}
         />
-
         <Route path="/seating" element={<SeatSelectionPage />} />
 
         <Route path="/summary" element={<FinalSummaryPage />} />

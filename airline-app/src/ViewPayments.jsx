@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const ViewPaymentsPage = () => {
+  //conditionals & variables
   const [customerPayment, setCustomerPayment] = useState(null);
-  const [isPaymentMade, setIsPaymentMade] = useState(false);
+  const [isPaymentMade, setIsPayment] = useState(false);
   const [newPayment, setNewPayment] = useState({
     paymentMethod: "",
     cardNumber: "", 
@@ -14,8 +15,8 @@ const ViewPaymentsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { user } = location.state || {}; //  user object passed from MainPage or LoginPage
-  const customerId = user ? user.userId : null; // customerId from the logged-in user
+  const { user } = location.state || {}; //  user object passed from mainpage
+  const customerId = user ? user.userId : null; // customerid from the user
 
   const handleMainPage = () => {
     navigate("/", { state: { user } });
@@ -25,7 +26,7 @@ const ViewPaymentsPage = () => {
     setShowForm(true);
   };
 
-  // Hardcoded payment data for each customer
+  // hardcoded payment data for each customer
   const paymentData = [
     {
       customerId: 1,
@@ -53,19 +54,20 @@ const ViewPaymentsPage = () => {
   ];
 
   useEffect(() => {
-    // Find the payment data for the current customer
+    // find the payment data for the current customer
     const customerPaymentData = paymentData.find(
       (payment) => payment.customerId === customerId
     );
 
     if (customerPaymentData && customerPaymentData.paymentInfo) {
-      setCustomerPayment(customerPaymentData); // Set customer payment details
-      setIsPaymentMade(true); // Customer has made a payment
+      setCustomerPayment(customerPaymentData); // set customer payment details
+      setIsPayment(true);
     } else {
-      setIsPaymentMade(false); // No payment made
+      setIsPaymentMade(false); //no payments
     }
   }, [customerId]);
 
+  /* used chat gbt here */
   const handlePaymentChange = (e) => {
     const { name, value } = e.target;
     setNewPayment((prevState) => ({
@@ -73,6 +75,7 @@ const ViewPaymentsPage = () => {
       [name]: value,
     }));
   };
+  /* used until here: utilized it to understand how to update the correct value */
 
   const handleAddPayment = () => {
     // Validation
@@ -85,53 +88,58 @@ const ViewPaymentsPage = () => {
       return;
     }
 
-    // For now, just simulate adding the new payment
+    //simulate adding the new payment
+    /* used chat gbt here */
     const updatedPaymentData = paymentData.map((payment) =>
       payment.customerId === customerId
         ? {
             ...payment,
-            totalFlyerPoints: payment.totalFlyerPoints + 100, // Add points for new payment
-            paymentInfo: newPayment, // Save the new payment info
+            totalFlyerPoints: payment.totalFlyerPoints,
+            paymentInfo: newPayment, // save new info
           }
         : payment
     );
+    /* used until here: utilized it to understand how to update new payment data */
 
-    // Find the updated customer payment details
+
+    // find the updated customer payment info
     const updatedCustomerPayment = updatedPaymentData.find(
       (payment) => payment.customerId === customerId
     );
 
-    setCustomerPayment(updatedCustomerPayment); // Update the UI with new payment
-    setIsPaymentMade(true); // Set the payment status to true
+    setCustomerPayment(updatedCustomerPayment); 
+    setIsPayment(true); 
 
-    // Clear the form
+    // clear & hide the from
     setNewPayment({
       paymentMethod: "",
       cardNumber: "",
       expirationDate: "",
     });
-    setShowForm(false); // Hide the form after submission
+    setShowForm(false); 
   };
 
+  /* used chatgbt here */
   const handleRemovePayment = () => {
-    // Remove payment information and update state
+    // remove payment information and update state
     const updatedPaymentData = paymentData.map((payment) =>
       payment.customerId === customerId
         ? {
             ...payment,
-            paymentInfo: null, // Remove payment info
-            totalFlyerPoints: payment.totalFlyerPoints - 100, // Remove points for removed payment
+            paymentInfo: null,
+            totalFlyerPoints: payment.totalFlyerPoints, 
           }
         : payment
     );
+    /* used until here: utilized it to understand how to remove payment information*/
 
-    // Find the updated customer payment details
+    // find the updated customer payment options
     const updatedCustomerPayment = updatedPaymentData.find(
       (payment) => payment.customerId === customerId
     );
 
     setCustomerPayment(updatedCustomerPayment);
-    setIsPaymentMade(false); // isPaymentMade to false since no payment exists
+    setIsPaymentMade(false); 
     alert("Payment removed successfully.");
   };
 
@@ -206,9 +214,11 @@ const ViewPaymentsPage = () => {
           <form
             className="passenger"
             onSubmit={(e) => {
+              {/*used chat here */}
               e.preventDefault();
-              handleAddPayment(); // Call the payment handler
+              handleAddPayment(); // call the payment handler
             }}
+             /* used unil here: utilized it to understand how to hook up add payment  */
           >
             <div className="input-group">
               <label>

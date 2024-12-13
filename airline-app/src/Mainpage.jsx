@@ -8,41 +8,44 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 
 const MainPage = () => {
-  // State hooks for form fields
+
+  // conditionals & variables
   const [location, setLocation] = useState("");
   const [destination, setDestination] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [destinationDate, setDestinationDate] = useState("");
   const [travellers, setTravellers] = useState("");
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  const [user, setUser] = useState(null); // State to store the user object
+  const [user, setUser] = useState(null); // state to store the user object
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const navigate = useNavigate(); // Initialize the navigate function
-  const locationState = useLocation(); // Get the state from the location (from LoginPage)
+  const navigate = useNavigate(); 
+  const locationState = useLocation(); // get the state from the location (from the login page)
 
   useEffect(() => {
     if (locationState.state?.user) {
       setUser(locationState.state.user);
-      setIsUserLoggedIn(true); // Mark the user as logged in
+      setIsUserLoggedIn(true); // mark the user as logged in
     }
   }, [locationState]);
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
+  /* refrenced geeks for geeks */
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  /* until here */
+
   const handleLogIn = () => {
-    navigate("/login");
+    navigate("/login"); // pass to the login page
   };
 
   const handleViewFlights = () => {
     navigate("/view-flights", {
-      state: { user }, // Pass the user object
+      state: { user }, // pass the user object
     });
   };
 
@@ -53,11 +56,12 @@ const MainPage = () => {
 
   const handleViewPayments = () => {
     navigate("/view-payments", {
-      state: { user }, // Pass the user object
+      state: { user }, // pass the user object
     });
   };
 
-  // Handle form submission
+  // handle form submission
+  /* used chatgbt here */
   const handleSearch = (e) => {
     e.preventDefault();
 
@@ -73,8 +77,10 @@ const MainPage = () => {
       state: formData,
     });
   };
+  /* until here: to understand how to share the information with the booking depart page */
 
   return (
+    /* followed a youtube tutorial: link: https://www.youtube.com/watch?v=7pt3gfJ37S8 */
     <div className="main-page">
       <nav>
         <div className="app_logo">Airplane App</div>
@@ -95,7 +101,7 @@ const MainPage = () => {
 
         {isUserLoggedIn && user && (
           <div
-          //geeks for geeks start
+          /* refrenced geeks for geeks */
           >
             <Button
               aria-controls="simple-menu"
@@ -116,6 +122,8 @@ const MainPage = () => {
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </div>
+          /* until here: utilized it to figure out how to make a user menu */
+
         )}
 
         {!isUserLoggedIn && (
@@ -150,7 +158,7 @@ const MainPage = () => {
                 <input
                   type="text"
                   value={location}
-                  onChange={(e) => setLocation(e.target.value)} // Update location state
+                  onChange={(e) => setLocation(e.target.value)} // update location state
                 />
                 <label>Location</label>
               </div>
@@ -167,7 +175,7 @@ const MainPage = () => {
                 <input
                   type="text"
                   value={destination}
-                  onChange={(e) => setDestination(e.target.value)} // Update destination state
+                  onChange={(e) => setDestination(e.target.value)} // update destination state
                 />
                 <label>Destination</label>
               </div>
@@ -184,7 +192,7 @@ const MainPage = () => {
                 <input
                   type="date"
                   value={departureDate}
-                  onChange={(e) => setDepartureDate(e.target.value)} // Update departureDate state
+                  onChange={(e) => setDepartureDate(e.target.value)} // update departureDate state
                 />
                 <label>Departure</label>
               </div>
@@ -201,7 +209,7 @@ const MainPage = () => {
                 <input
                   type="date"
                   value={destinationDate}
-                  onChange={(e) => setDestinationDate(e.target.value)} // Update destination state
+                  onChange={(e) => setDestinationDate(e.target.value)} // update destination state
                 />
                 <label>Destination</label>
               </div>
@@ -218,7 +226,7 @@ const MainPage = () => {
                 <input
                   type="number"
                   value={travellers}
-                  onChange={(e) => setTravellers(e.target.value)} // Update travellers state
+                  onChange={(e) => setTravellers(e.target.value)} // update travellers state
                 />
                 <label>Travellers</label>
               </div>
@@ -232,6 +240,7 @@ const MainPage = () => {
         </form>
       </section>
     </div>
+    /* until here */
   );
 };
 

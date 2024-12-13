@@ -2,28 +2,24 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom"; 
 
 const PassengerInfoPage = () => {
+
   const navigate = useNavigate(); 
   const location = useLocation(); 
-
   const { totalCost: initialTotalCost } = location.state || {};
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [dob, setDob] = useState("");
-
-  // States for amenities
-  const [addAmenities, setAddAmenities] = useState(false);
-  const [checkedBags, setCheckedBags] = useState(0);
-
-  // Price Constants
   const checkedBagPrice = 50;
   const amenitiesPrice = 75;
 
-  // Calculate totals
+  //conditionals & variables
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [dob, setDob] = useState(""); 
+  const [addAmenities, setAddAmenities] = useState(false);
+  const [checkedBags, setCheckedBags] = useState(0);
   const amenitiesCost = addAmenities ? amenitiesPrice : 0;
   const checkedBagsCost = checkedBags * checkedBagPrice;
 
-  // Final total cost calculation (initial flight cost + additional options)
+  // final total cost calculation (initial flight cost + additional ammeties, baggage etc)
   const totalCost = initialTotalCost + amenitiesCost + checkedBagsCost;
 
   const handleCheckedBagIncrease = () => setCheckedBags(checkedBags + 1);
@@ -31,7 +27,7 @@ const PassengerInfoPage = () => {
     setCheckedBags(Math.max(checkedBags - 1, 0));
 
   const handleSubmit = () => {
-    // Collect passenger info
+    // collect passenger info
     const passengerInfo = {
       firstName,
       lastName,
@@ -39,14 +35,18 @@ const PassengerInfoPage = () => {
       addAmenities,
       checkedBags,
     };
-
+    
+    /* used chatgbt here */
     navigate("/seating", {
       state: {
-        ...location.state, // Carry over all previous state (like flight details, etc.)
-        passengerInfo, // Add passenger info to the state
-        totalCost, // Update the total cost
+        ...location.state, // carry over all previous state
+        passengerInfo, // add passenger info to the state
+        totalCost,
       },
     });
+
+    /* until here: utilized it to undertand how to carry over all the previous states aka information */
+
   };
 
   return (
@@ -73,7 +73,9 @@ const PassengerInfoPage = () => {
               type="text"
               id="first-name"
               value={firstName}
+              /* used chatgbt here */
               onChange={(e) => setFirstName(e.target.value)}
+              /* used until here: understand how to update values after chnages have been made */
               placeholder="Enter your first name"
             />
           </div>
@@ -84,7 +86,10 @@ const PassengerInfoPage = () => {
               type="text"
               id="last-name"
               value={lastName}
+              /* used chatgbt here */
               onChange={(e) => setLastName(e.target.value)}
+              /* used until here: understand how to update values after chnages have been made */
+
               placeholder="Enter your last name"
             />
           </div>
@@ -95,19 +100,23 @@ const PassengerInfoPage = () => {
               type="date"
               id="dob"
               value={dob}
+              /* used chatgbt here */
               onChange={(e) => setDob(e.target.value)}
+              /* used until here: understand how to update values after chnages have been made */
+
             />
           </div>
         </form>
       </div>
 
-      {/* Amenities Section */}
+      {/* amenities section */}
       <div className="amenities-section">
         <h2>
           <span>Amenities</span>
         </h2>
         <label className="ammenities-label">
-          {/* Custom checkbox styling */}
+          {/* custom checkbox styling */}
+          {/* used chatgbt here */}
           <label className="container">
             Add Amenities ($75)
             <input
@@ -120,18 +129,22 @@ const PassengerInfoPage = () => {
         </label>
         <p>Price: ${amenitiesCost}</p>
       </div>
+      {/* used until here: utilized it to get help on how to set up a check box */}
 
       {/* Checked Baggage Section */}
       <div className="checked-baggage-section">
         <h2>
           <span>Checked Baggage</span>
         </h2>
+        {/* used chatgbt here */}
         <div className="baggage-control">
           <button onClick={handleCheckedBagDecrease}>-</button>
           <span>{checkedBags} Checked Bags</span>
           <button onClick={handleCheckedBagIncrease}>+</button>
+          {/* until here: utolized to figure out how to do baggage control */}
         </div>
         <p>Price: ${checkedBagsCost}</p>
+
       </div>
 
       {/* Grand Total */}

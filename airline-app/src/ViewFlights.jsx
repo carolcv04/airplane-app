@@ -2,19 +2,23 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom"; 
 
 const ViewFlightsPage = () => {
+  //conditionals  varibales
   const [customerFlights, setCustomerFlights] = useState(null);
   const [isFlightBooked, setIsFlightBooked] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { user } = location.state || {}; // user object passed from MainPage or LoginPage
-  const customerId = user ? user.userId : null; // customerId from the logged-in user
+  const { user } = location.state || {}; // user information passed form mainpage 
+  //used chat here 
+  const customerId = user ? user.userId : null; // customerId from the user
+  //until here: utilized it to understand how to set null values 
 
   const handleMainPage = () => {
     navigate("/", { state: { user } });
   };
 
+  //hardcoded data
   const flightsData = [
     {
       customerId: 1,
@@ -64,6 +68,7 @@ const ViewFlightsPage = () => {
     },
   ];
 
+  /* used chat here */
   useEffect(() => {
     // flight data for the current customer
     const customerFlight = flightsData.find(
@@ -72,13 +77,15 @@ const ViewFlightsPage = () => {
 
     if (customerFlight && customerFlight.departureFlight) {
       setCustomerFlights(customerFlight); // customer flight details
-      setIsFlightBooked(true); // Customer has a flight booked
+      setIsFlightBooked(true); // customer has a flight booked
     } else {
-      setIsFlightBooked(false); // No flights booked
+      setIsFlightBooked(false); // no flights booked
     }
   }, [customerId]);
+  /* until here: utilized it to understand how to structure this condtional */
 
-  const handleCancelBooking = () => {
+
+  const handleCancelBooking = () => { //sets all variables to null if the booking is canceled
     // index of the customer and update their flight data
     const updatedFlightsData = flightsData.map((flight) =>
       flight.customerId === customerId
@@ -94,12 +101,15 @@ const ViewFlightsPage = () => {
     );
 
     // update the state for customer flights
+
+    //used chat here 
     const updatedCustomerFlight = updatedFlightsData.find(
       (flight) => flight.customerId === customerId
     );
+    //until here: utilized it to strusture how to update customers flight
 
-    setCustomerFlights(updatedCustomerFlight); // Update the UI with canceled flight
-    setIsFlightBooked(false); // Set the booking status to false
+    setCustomerFlights(updatedCustomerFlight); 
+    setIsFlightBooked(false); 
 
     // back to the home page after cancellation
     alert("Your booking has been canceled.");

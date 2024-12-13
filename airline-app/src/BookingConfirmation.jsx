@@ -2,14 +2,19 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const BookingConfirmedPage = () => {
+
   const navigate = useNavigate();
 
-  useEffect(() => {
+  /*used chat starting here */
+  useEffect(() => { //loads in the booking page for 3 seconds
     const timer = setTimeout(() => {
       navigate("/", { replace: true });
-    }, 3000); // 5 seconds delay
+    }, 3000); 
     return () => clearTimeout(timer);
   }, [navigate]);
+  /* ending here: utilized to figure out how to have my page only load in for a certain period of time, before
+  movng onto the main page*/
+  
 
   return (
     <div className="booking-confirmed-page">
