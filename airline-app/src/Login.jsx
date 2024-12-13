@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import "./main.css"; // Assuming your CSS file is still the same
+import { useNavigate } from "react-router-dom"; 
+import "./main.css";
 
 const LoginPage = () => {
-  // State hooks for form fields
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-<<<<<<< HEAD
   const [error, setError] = useState(""); // State for error message
 
   const navigate = useNavigate();
 
-  // Hardcoded list of users with more details (userId, username, email, etc.)
   const users = [
     {
       userId: 1,
@@ -44,33 +41,19 @@ const LoginPage = () => {
     );
 
     if (foundUser) {
-      // If credentials are correct, navigate to the main page and pass the entire user object
       navigate("/", {
         state: { user: foundUser }, // Pass the entire user object to the MainPage
       });
     } else {
-      // If credentials are incorrect, show error message
       setError("Invalid username or password");
     }
-=======
-
-  const navigate = useNavigate();
-  // Handle login form submission
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Process login logic here
-    console.log("Logging in with:", username, password);
->>>>>>> 951cc9101c7388f1dc16b51efd42f212e987bf1a
   };
 
   // Handle guest login
   const handleGuestLogin = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
     setPassword(null);
     setUsername(null);
-=======
->>>>>>> 951cc9101c7388f1dc16b51efd42f212e987bf1a
     navigate("/");
   };
 
@@ -82,13 +65,10 @@ const LoginPage = () => {
 
       <form className="login-page" onSubmit={handleLogin}>
         <h1 className="login-page">Login</h1>
-<<<<<<< HEAD
 
         {/* Display error message if invalid login */}
         {error && <div className="error-message">{error}</div>}
 
-=======
->>>>>>> 951cc9101c7388f1dc16b51efd42f212e987bf1a
         <div className="textBox-login-page">
           <input
             type="text"
@@ -97,10 +77,6 @@ const LoginPage = () => {
             onChange={(e) => setUsername(e.target.value)} // Update username state
           />
         </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 951cc9101c7388f1dc16b51efd42f212e987bf1a
         <div className="textBox-login-page">
           <input
             type="password"
@@ -109,10 +85,6 @@ const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)} // Update password state
           />
         </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 951cc9101c7388f1dc16b51efd42f212e987bf1a
         <input type="submit" value="Login" className="loginBtn-login-page" />
 
         <div className="signUp-login-page">
@@ -123,10 +95,6 @@ const LoginPage = () => {
         <h2>
           <span>or</span>
         </h2>
-<<<<<<< HEAD
-
-=======
->>>>>>> 951cc9101c7388f1dc16b51efd42f212e987bf1a
         <input
           type="submit"
           value="Continue as a Guest"

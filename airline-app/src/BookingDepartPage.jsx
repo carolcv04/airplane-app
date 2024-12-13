@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./main.css"; // Assuming your CSS file is still the same
+import "./main.css"; 
 
 const BookingDepartPage = () => {
   const location = useLocation();
@@ -372,7 +372,6 @@ const BookingDepartPage = () => {
         </div>
       )}
 
-      {/* Total Cost Display */}
       {isReturnFlightSelected && isFlightSelected && (
         <div className="total-cost">
           <p>Total Cost: ${totalCost}</p>

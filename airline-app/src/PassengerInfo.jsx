@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom"; // Import useLocation to access previous state
+import { useNavigate, useLocation } from "react-router-dom"; 
 
 const PassengerInfoPage = () => {
-  const navigate = useNavigate(); // Initialize the useNavigate hook
-  const location = useLocation(); // Get the previous state (if any)
+  const navigate = useNavigate(); 
+  const location = useLocation(); 
 
-  // Access the totalCost passed from the previous page
   const { totalCost: initialTotalCost } = location.state || {};
 
-  // States for passenger info
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [dob, setDob] = useState("");
@@ -42,7 +40,6 @@ const PassengerInfoPage = () => {
       checkedBags,
     };
 
-    // Navigate to the next page (Seat Selection) with the current state and passenger info
     navigate("/seating", {
       state: {
         ...location.state, // Carry over all previous state (like flight details, etc.)

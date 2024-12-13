@@ -2,22 +2,20 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const ViewPaymentsPage = () => {
-  // State to hold customer payment data
   const [customerPayment, setCustomerPayment] = useState(null);
   const [isPaymentMade, setIsPaymentMade] = useState(false);
   const [newPayment, setNewPayment] = useState({
     paymentMethod: "",
-    cardNumber: "", // Add cardNumber field
-    expirationDate: "", // Add expirationDate field
+    cardNumber: "", 
+    expirationDate: "",
   });
   const [showForm, setShowForm] = useState(false); // Track form visibility
 
-  // Get the customer data passed through state (customerId)
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { user } = location.state || {}; // Get the user object passed from MainPage or LoginPage
-  const customerId = user ? user.userId : null; // Get customerId from the logged-in user
+  const { user } = location.state || {}; //  user object passed from MainPage or LoginPage
+  const customerId = user ? user.userId : null; // customerId from the logged-in user
 
   const handleMainPage = () => {
     navigate("/", { state: { user } });
@@ -47,7 +45,6 @@ const ViewPaymentsPage = () => {
         expirationDate: "2024-12-12",
       },
     },
-    // Example of a customer with no payments
     {
       customerId: 3,
       totalFlyerPoints: 0,
@@ -88,7 +85,6 @@ const ViewPaymentsPage = () => {
       return;
     }
 
-    // Here, we would update the payment data in a real application
     // For now, just simulate adding the new payment
     const updatedPaymentData = paymentData.map((payment) =>
       payment.customerId === customerId
@@ -134,11 +130,8 @@ const ViewPaymentsPage = () => {
       (payment) => payment.customerId === customerId
     );
 
-    // Update state to reflect removal of payment
     setCustomerPayment(updatedCustomerPayment);
-    setIsPaymentMade(false); // Set isPaymentMade to false since no payment exists
-
-    // Optionally, you can show a message or feedback
+    setIsPaymentMade(false); // isPaymentMade to false since no payment exists
     alert("Payment removed successfully.");
   };
 
@@ -213,7 +206,7 @@ const ViewPaymentsPage = () => {
           <form
             className="passenger"
             onSubmit={(e) => {
-              e.preventDefault(); // Prevent default form submission
+              e.preventDefault();
               handleAddPayment(); // Call the payment handler
             }}
           >

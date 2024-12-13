@@ -414,7 +414,6 @@ nav {
   padding: 2rem 1rem;
 }
 
-<<<<<<< HEAD
 summary {
   border-radius: 2rem;
   border: 2px solid var(--extra-light);
@@ -424,8 +423,6 @@ summary {
   padding: 2rem 1rem;
 }
 
-=======
->>>>>>> 951cc9101c7388f1dc16b51efd42f212e987bf1a
 .departure-summary-title {
   font-size: 2rem;
   margin-bottom: 5px;
@@ -891,7 +888,6 @@ h3 {
   transform: scale(1.05); /* Slightly increase size on hover */
   transition: background-color 0.3s;
 }
-<<<<<<< HEAD
 
 .confirmation-message {
   align-items: center;
@@ -899,5 +895,3 @@ h3 {
   font-size: x-large;
   font-weight: 300;
 }
-=======
->>>>>>> 951cc9101c7388f1dc16b51efd42f212e987bf1a

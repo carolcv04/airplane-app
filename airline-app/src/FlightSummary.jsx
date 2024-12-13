@@ -2,7 +2,6 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const SummaryPage = () => {
-  // Get the state passed from the previous page (PassengerInfoPage or SeatSelectionPage)
   const location = useLocation();
   const navigate = useNavigate(); // Initialize the navigate function
 
@@ -19,13 +18,11 @@ const SummaryPage = () => {
     // Navigate back to the home page or main page (adjust the path as needed)
     navigate("/");
   };
-<<<<<<< HEAD
+  
   const handleBookingConfirmation = () => {
     // Navigate back to the home page or main page (adjust the path as needed)
     navigate("/booking-confirmation");
   };
-=======
->>>>>>> 951cc9101c7388f1dc16b51efd42f212e987bf1a
 
   return (
     <div className="summary-page">
@@ -104,11 +101,7 @@ const SummaryPage = () => {
         {/* Confirmation and Cancel Booking Buttons */}
         <div className="flight-summary-button-container">
           <button
-<<<<<<< HEAD
             onClick={handleBookingConfirmation}
-=======
-            onClick={() => alert("Booking Confirmed!")}
->>>>>>> 951cc9101c7388f1dc16b51efd42f212e987bf1a
             className="confirm-button"
           >
             Confirm Booking

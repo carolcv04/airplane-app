@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom"; // Import useNavigate and useLocation
 import "./main.css"; // Assuming your CSS file is still the same
@@ -7,13 +6,6 @@ import "remixicon/fonts/remixicon.css"; // Path relative to the current file
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
-=======
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import "./main.css"; // Assuming your CSS file is still the same
-import headerImage from "./assets/header.png";
-import "remixicon/fonts/remixicon.css"; // Path relative to the current file
->>>>>>> 951cc9101c7388f1dc16b51efd42f212e987bf1a
 
 const MainPage = () => {
   // State hooks for form fields
@@ -22,7 +14,6 @@ const MainPage = () => {
   const [departureDate, setDepartureDate] = useState("");
   const [destinationDate, setDestinationDate] = useState("");
   const [travellers, setTravellers] = useState("");
-<<<<<<< HEAD
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [user, setUser] = useState(null); // State to store the user object
 
@@ -31,7 +22,6 @@ const MainPage = () => {
   const locationState = useLocation(); // Get the state from the location (from LoginPage)
 
   useEffect(() => {
-    // If there's a user object in the location state, set it and mark the user as logged in
     if (locationState.state?.user) {
       setUser(locationState.state.user);
       setIsUserLoggedIn(true); // Mark the user as logged in
@@ -67,23 +57,10 @@ const MainPage = () => {
     });
   };
 
-=======
-
-  const navigate = useNavigate(); // Initialize the navigate function
-
-  const handleLogIn = () => {
-    // Navigate back to the home page or main page (adjust the path as needed)
-    navigate("/login");
-  };
->>>>>>> 951cc9101c7388f1dc16b51efd42f212e987bf1a
   // Handle form submission
   const handleSearch = (e) => {
     e.preventDefault();
 
-<<<<<<< HEAD
-=======
-    // Create an object with the form data
->>>>>>> 951cc9101c7388f1dc16b51efd42f212e987bf1a
     const formData = {
       location,
       destination,
@@ -92,14 +69,8 @@ const MainPage = () => {
       travellers,
     };
 
-<<<<<<< HEAD
     navigate("/book-depart", {
       state: formData,
-=======
-    // Navigate to the BookingDepartPage and pass form data using state
-    navigate("/book-depart", {
-      state: formData, // Pass the form data to the next page
->>>>>>> 951cc9101c7388f1dc16b51efd42f212e987bf1a
     });
   };
 
@@ -121,7 +92,6 @@ const MainPage = () => {
             <a href="#">Contact</a>
           </li>
         </ul>
-<<<<<<< HEAD
 
         {isUserLoggedIn && user && (
           <div
@@ -154,13 +124,6 @@ const MainPage = () => {
           </button>
         )}
       </nav>
-=======
-        <button className="btn-main-page" onClick={handleLogIn}>
-          Log In
-        </button>
-      </nav>
-
->>>>>>> 951cc9101c7388f1dc16b51efd42f212e987bf1a
       <header className="section_container header_container">
         <h1 className="section_header">
           Find And Book

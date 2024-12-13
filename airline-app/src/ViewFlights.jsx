@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom"; // Import useNavigate and useLocation
+import { useNavigate, useLocation } from "react-router-dom"; 
 
 const ViewFlightsPage = () => {
-  // State to hold customer flight data
   const [customerFlights, setCustomerFlights] = useState(null);
   const [isFlightBooked, setIsFlightBooked] = useState(false);
 
-  // Get the customer data passed through state (customerId)
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { user } = location.state || {}; // Get the user object passed from MainPage or LoginPage
-  const customerId = user ? user.userId : null; // Get customerId from the logged-in user
+  const { user } = location.state || {}; // user object passed from MainPage or LoginPage
+  const customerId = user ? user.userId : null; // customerId from the logged-in user
 
   const handleMainPage = () => {
     navigate("/", { state: { user } });
@@ -67,13 +65,13 @@ const ViewFlightsPage = () => {
   ];
 
   useEffect(() => {
-    // Find the flight data for the current customer
+    // flight data for the current customer
     const customerFlight = flightsData.find(
       (flight) => flight.customerId === customerId
     );
 
     if (customerFlight && customerFlight.departureFlight) {
-      setCustomerFlights(customerFlight); // Set customer flight details
+      setCustomerFlights(customerFlight); // customer flight details
       setIsFlightBooked(true); // Customer has a flight booked
     } else {
       setIsFlightBooked(false); // No flights booked
@@ -81,7 +79,7 @@ const ViewFlightsPage = () => {
   }, [customerId]);
 
   const handleCancelBooking = () => {
-    // Find the index of the customer and update their flight data
+    // index of the customer and update their flight data
     const updatedFlightsData = flightsData.map((flight) =>
       flight.customerId === customerId
         ? {
@@ -95,7 +93,7 @@ const ViewFlightsPage = () => {
         : flight
     );
 
-    // In this case, update the state for customer flights
+    // update the state for customer flights
     const updatedCustomerFlight = updatedFlightsData.find(
       (flight) => flight.customerId === customerId
     );
@@ -103,9 +101,9 @@ const ViewFlightsPage = () => {
     setCustomerFlights(updatedCustomerFlight); // Update the UI with canceled flight
     setIsFlightBooked(false); // Set the booking status to false
 
-    // Optionally, navigate back to the home page after cancellation
+    // back to the home page after cancellation
     alert("Your booking has been canceled.");
-    navigate("/", { state: { user } }); // Pass the user object to the home page
+    navigate("/", { state: { user } }); // user object to the home page
   };
 
   if (!customerId) {

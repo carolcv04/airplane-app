@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import seatingMap from "./assets/seating.png"; // Assuming you have a seating map image
+import seatingMap from "./assets/seating.png"; 
 
 const SeatSelectionPage = () => {
-  // Retrieve location state (passed from the previous page)
   const location = useLocation();
   const { passengerInfo, totalCost } = location.state || {};
 
-  // State for seats selection
   const [selectedDepartureSeat, setSelectedDepartureSeat] = useState(null);
   const [selectedReturnSeat, setSelectedReturnSeat] = useState(null);
 
@@ -43,7 +41,6 @@ const SeatSelectionPage = () => {
       returnSeat: selectedReturnSeat,
     };
 
-    // Navigate to the Summary Page with all the necessary state
     navigate("/summary", {
       state: {
         ...location.state, // Carry over all previous state (e.g., passengerInfo, totalCost)
