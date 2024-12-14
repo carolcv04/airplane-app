@@ -7,7 +7,7 @@ const ViewPaymentsPage = () => {
   const [isPaymentMade, setIsPayment] = useState(false);
   const [newPayment, setNewPayment] = useState({
     paymentMethod: "",
-    cardNumber: "", 
+    cardNumber: "",
     expirationDate: "",
   });
   const [showForm, setShowForm] = useState(false); // Track form visibility
@@ -63,7 +63,7 @@ const ViewPaymentsPage = () => {
       setCustomerPayment(customerPaymentData); // set customer payment details
       setIsPayment(true);
     } else {
-      setIsPaymentMade(false); //no payments
+      setIsPayment(false); //no payments
     }
   }, [customerId]);
 
@@ -101,14 +101,13 @@ const ViewPaymentsPage = () => {
     );
     /* used until here: utilized it to understand how to update new payment data */
 
-
     // find the updated customer payment info
     const updatedCustomerPayment = updatedPaymentData.find(
       (payment) => payment.customerId === customerId
     );
 
-    setCustomerPayment(updatedCustomerPayment); 
-    setIsPayment(true); 
+    setCustomerPayment(updatedCustomerPayment);
+    setIsPayment(true);
 
     // clear & hide the from
     setNewPayment({
@@ -116,7 +115,7 @@ const ViewPaymentsPage = () => {
       cardNumber: "",
       expirationDate: "",
     });
-    setShowForm(false); 
+    setShowForm(false);
   };
 
   /* used chatgbt here */
@@ -127,7 +126,7 @@ const ViewPaymentsPage = () => {
         ? {
             ...payment,
             paymentInfo: null,
-            totalFlyerPoints: payment.totalFlyerPoints, 
+            totalFlyerPoints: payment.totalFlyerPoints,
           }
         : payment
     );
@@ -139,7 +138,7 @@ const ViewPaymentsPage = () => {
     );
 
     setCustomerPayment(updatedCustomerPayment);
-    setIsPaymentMade(false); 
+    setIsPayment(false);
     alert("Payment removed successfully.");
   };
 
@@ -214,11 +213,13 @@ const ViewPaymentsPage = () => {
           <form
             className="passenger"
             onSubmit={(e) => {
-              {/*used chat here */}
+              {
+                /*used chat here */
+              }
               e.preventDefault();
               handleAddPayment(); // call the payment handler
             }}
-             /* used unil here: utilized it to understand how to hook up add payment  */
+            /* used unil here: utilized it to understand how to hook up add payment  */
           >
             <div className="input-group">
               <label>
